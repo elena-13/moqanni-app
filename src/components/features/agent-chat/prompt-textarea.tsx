@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import TextareaAutosize from "react-textarea-autosize";
+import TextareaAutosize from 'react-textarea-autosize';
 
 interface PromptTextareaProps {
   value: string;
@@ -15,7 +15,7 @@ export function PromptTextarea({
 }: PromptTextareaProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // isComposing guards IME input, where Enter confirms a candidate rather than sending
-    if (e.key !== "Enter" || e.shiftKey || e.nativeEvent.isComposing) return;
+    if (e.key !== 'Enter' || e.shiftKey || e.nativeEvent.isComposing) return;
 
     e.preventDefault();
     e.currentTarget.form?.requestSubmit();

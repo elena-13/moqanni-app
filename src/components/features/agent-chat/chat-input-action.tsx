@@ -1,6 +1,6 @@
-import { Send, StopCircle } from "lucide-react";
+import { Send, StopCircle } from 'lucide-react';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 interface ChatInputActionProps {
   isGenerating: boolean;
@@ -9,7 +9,7 @@ interface ChatInputActionProps {
 }
 
 const baseClassName =
-  "ml-2 flex items-center gap-1 rounded-lg px-4 py-2 text-xs font-medium transition-colors";
+  'ml-2 flex items-center gap-1 rounded-lg px-4 py-2 text-xs font-medium transition-colors';
 
 export function ChatInputAction({
   isGenerating,
@@ -21,7 +21,10 @@ export function ChatInputAction({
       <button
         type="button"
         onClick={onStop}
-        className={cn(baseClassName, "bg-zinc-800 text-red-400 hover:bg-zinc-700")}
+        className={cn(
+          baseClassName,
+          'bg-zinc-800 text-red-400 hover:bg-zinc-700',
+        )}
       >
         <StopCircle className="h-4 w-4" /> Stop
       </button>
@@ -34,7 +37,7 @@ export function ChatInputAction({
       disabled={!canSubmit}
       className={cn(
         baseClassName,
-        "bg-emerald-600 text-white hover:bg-emerald-500 disabled:opacity-50 disabled:hover:bg-emerald-600",
+        'bg-emerald-600 text-white hover:bg-emerald-500 disabled:opacity-50 disabled:hover:bg-emerald-600',
       )}
     >
       <Send className="h-4 w-4" /> Build

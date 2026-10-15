@@ -1,10 +1,10 @@
-import { BlockType } from "@/store/chat-store";
-import { createParser, type EventSourceMessage } from "eventsource-parser";
+import { BlockType } from '@/store/chat-store';
+import { createParser, type EventSourceMessage } from 'eventsource-parser';
 
 // Events we expect to receive from the server
 export type StreamEvent =
   | {
-      event: "researcher.started" | "writer.started" | "reviewer.started";
+      event: 'researcher.started' | 'writer.started' | 'reviewer.started';
       data: {
         agent: string;
         task: string;
@@ -12,27 +12,25 @@ export type StreamEvent =
     }
   | {
       event:
-        | "researcher.text.delta"
-        | "writer.text.delta"
-        | "reviewer.text.delta";
+        'researcher.text.delta' | 'writer.text.delta' | 'reviewer.text.delta';
       data: {
         text: string;
       };
     }
   | {
-      event: "researcher.completed" | "writer.completed" | "reviewer.completed";
+      event: 'researcher.completed' | 'writer.completed' | 'reviewer.completed';
       data: {
         status: string;
       };
     }
   | {
-      event: "run.completed";
+      event: 'run.completed';
       data: {
         status: string;
       };
     }
   | {
-      event: "researcher.widget" | "writer.widget" | "reviewer.widget";
+      event: 'researcher.widget' | 'writer.widget' | 'reviewer.widget';
       data: {
         agent: string;
         task: string;
@@ -46,11 +44,11 @@ export async function consumeSSEStream(
   onEvent: (event: StreamEvent) => void,
 ) {
   if (!response.body) {
-    throw new Error("No readable stream");
+    throw new Error('No readable stream');
   }
 
   const reader = response.body.getReader();
-  const decoder = new TextDecoder("utf-8");
+  const decoder = new TextDecoder('utf-8');
 
   const parser = createParser({
     onEvent(event: EventSourceMessage) {
@@ -58,16 +56,16 @@ export async function consumeSSEStream(
         const data = JSON.parse(event.data);
 
         onEvent({
-          event: event.event as StreamEvent["event"],
+          event: event.event as StreamEvent['event'],
           data,
         } as StreamEvent);
       } catch (error) {
-        console.error("Failed to parse SSE event:", event.data, error);
+        console.error('Failed to parse SSE event:', event.data, error);
       }
     },
 
     onError(error) {
-      console.error("SSE parse error:", error);
+      console.error('SSE parse error:', error);
     },
   });
 

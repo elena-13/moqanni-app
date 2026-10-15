@@ -34,12 +34,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Other Scripts
 
-| Command         | Description                        |
-| --------------- | ---------------------------------- |
-| `npm run dev`   | Start the development server       |
-| `npm run build` | Build the app for production       |
-| `npm run start` | Start the production server        |
-| `npm run lint`  | Run ESLint                         |
+| Command         | Description                  |
+| --------------- | ---------------------------- |
+| `npm run dev`   | Start the development server |
+| `npm run build` | Build the app for production |
+| `npm run start` | Start the production server  |
+| `npm run lint`  | Run ESLint                   |
 
 ## Backend Integration
 
@@ -58,13 +58,13 @@ The request body:
 
 The backend responds with an SSE stream (`Content-Type: text/event-stream`). Supported events, where `<agent>` is `researcher`, `writer`, or `reviewer`:
 
-| Event                  | Payload                                   | Description                         |
-| ---------------------- | ----------------------------------------- | ----------------------------------- |
-| `<agent>.started`      | `{ agent, task }`                         | An agent started working on a task  |
-| `<agent>.text.delta`   | `{ text }`                                | A chunk of generated text           |
-| `<agent>.widget`       | `{ agent, task, type, widgetData }`       | A complete widget (e.g. an image)   |
-| `<agent>.completed`    | `{ status }`                              | The agent finished its task         |
-| `run.completed`        | `{ status }`                              | The whole run is finished           |
+| Event                | Payload                             | Description                        |
+| -------------------- | ----------------------------------- | ---------------------------------- |
+| `<agent>.started`    | `{ agent, task }`                   | An agent started working on a task |
+| `<agent>.text.delta` | `{ text }`                          | A chunk of generated text          |
+| `<agent>.widget`     | `{ agent, task, type, widgetData }` | A complete widget (e.g. an image)  |
+| `<agent>.completed`  | `{ status }`                        | The agent finished its task        |
+| `run.completed`      | `{ status }`                        | The whole run is finished          |
 
 Text deltas are buffered and flushed to the store every 50 ms to keep rendering efficient.
 

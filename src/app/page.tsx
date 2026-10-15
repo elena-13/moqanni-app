@@ -1,13 +1,13 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import { WorkspaceLayout } from "@/components/layout/workspace";
-import { ChatFeed } from "@/components/features/agent-chat/chat-feed";
-import { ChatInput } from "@/components/features/agent-chat/chat-input";
+import { WorkspaceLayout } from '@/components/layout/workspace';
+import { ChatFeed } from '@/components/features/agent-chat/chat-feed';
+import { ChatInput } from '@/components/features/agent-chat/chat-input';
 
 export default function TooltenderPage() {
   return (
     <WorkspaceLayout>
-      <div className="flex h-full flex-col relative">
+      <div className="relative flex h-full flex-col">
         <div className="flex-1 overflow-y-auto">
           <ChatFeed />
         </div>

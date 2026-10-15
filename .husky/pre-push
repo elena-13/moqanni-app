@@ -1,0 +1,3 @@
+# Whole-project gate: types + lint must pass before anything reaches the remote.
+npm run typecheck
+npm run lint

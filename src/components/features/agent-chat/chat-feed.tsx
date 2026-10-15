@@ -1,9 +1,9 @@
 // Лента сообщений
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import { useChatStore } from "@/store/chat-store";
-import { BlockFactory } from "./renderers/block-factory";
+import { useEffect, useRef } from 'react';
+import { useChatStore } from '@/store/chat-store';
+import { BlockFactory } from './renderers/block-factory';
 
 export function ChatFeed() {
   // Подписываемся ТОЛЬКО на массив ID.
@@ -13,7 +13,7 @@ export function ChatFeed() {
 
   // Автоскролл вниз при появлении новых блоков
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [blockIds.length]);
 
   if (blockIds.length === 0) {

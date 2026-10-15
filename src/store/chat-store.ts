@@ -1,11 +1,11 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 // 1. Дискриминатор для нашей Фабрики Компонентов
-export type BlockType = "text" | "image_widget" | "code_preview" | "tool_log";
+export type BlockType = 'text' | 'image_widget' | 'code_preview' | 'tool_log';
 
 export interface AgentBlock {
   id: string;
-  role: "user" | "assistant"; // Отделяем промпты человека от ответов ИИ
+  role: 'user' | 'assistant'; // Отделяем промпты человека от ответов ИИ
   type: BlockType;
 
   // Метаданные агента (опционально, так как у пользователя их нет)
@@ -16,7 +16,7 @@ export interface AgentBlock {
   text: string; // Текст заполняется через flushTextDelta
   data?: unknown; // Сюда можно положить { urls: [...] } от DALL-E или логи тулов
 
-  status: "running" | "completed" | "error" | "aborted";
+  status: 'running' | 'completed' | 'error' | 'aborted';
   error?: string;
 }
 
@@ -51,13 +51,13 @@ export const useChatStore = create<ChatState>((set) => ({
         blockIds: [...state.blockIds, id],
         blocks: {
           ...state.blocks,
-          [id]: { id, role: "user", type: "text", text, status: "completed" },
+          [id]: { id, role: 'user', type: 'text', text, status: 'completed' },
         },
       };
     }),
 
   // Добавлен type, чтобы понимать, картинку мы ждем или текст
-  startAgent: (id, agentName, task, type = "text") =>
+  startAgent: (id, agentName, task, type = 'text') =>
     set((state) => {
       if (state.blocks[id]) return state;
       return {
@@ -66,12 +66,12 @@ export const useChatStore = create<ChatState>((set) => ({
           ...state.blocks,
           [id]: {
             id,
-            role: "assistant",
+            role: 'assistant',
             type,
             agentName,
             task,
-            text: "",
-            status: "running",
+            text: '',
+            status: 'running',
           },
         },
       };
@@ -80,7 +80,7 @@ export const useChatStore = create<ChatState>((set) => ({
   flushTextDelta: (id, accumulatedText) =>
     set((state) => {
       const block = state.blocks[id];
-      if (!block || block.status !== "running") return state;
+      if (!block || block.status !== 'running') return state;
 
       return {
         blocks: {
@@ -108,7 +108,7 @@ export const useChatStore = create<ChatState>((set) => ({
       const block = state.blocks[id];
       if (!block) return state;
       return {
-        blocks: { ...state.blocks, [id]: { ...block, status: "completed" } },
+        blocks: { ...state.blocks, [id]: { ...block, status: 'completed' } },
       };
     }),
 
@@ -117,7 +117,7 @@ export const useChatStore = create<ChatState>((set) => ({
       const block = state.blocks[id];
       if (!block) return state;
       return {
-        blocks: { ...state.blocks, [id]: { ...block, status: "error", error } },
+        blocks: { ...state.blocks, [id]: { ...block, status: 'error', error } },
       };
     }),
 

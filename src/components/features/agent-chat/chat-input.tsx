@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { ChatInputAction } from "@/components/features/agent-chat/chat-input-action";
-import { PromptTextarea } from "@/components/features/agent-chat/prompt-textarea";
-import { useChatStream } from "@/hooks/use-chat-stream";
-import { useChatStore } from "@/store/chat-store";
+import { ChatInputAction } from '@/components/features/agent-chat/chat-input-action';
+import { PromptTextarea } from '@/components/features/agent-chat/prompt-textarea';
+import { useChatStream } from '@/hooks/use-chat-stream';
+import { useChatStore } from '@/store/chat-store';
 
 export function ChatInput() {
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState('');
   const { startStream, abort } = useChatStream();
   const isGenerating = useChatStore((s) =>
-    Object.values(s.blocks).some((b) => b.status === "running"),
+    Object.values(s.blocks).some((b) => b.status === 'running'),
   );
 
   const canSubmit = prompt.trim().length > 0;
@@ -21,7 +21,7 @@ export function ChatInput() {
     if (!canSubmit || isGenerating) return;
 
     startStream(prompt);
-    setPrompt("");
+    setPrompt('');
   };
 
   return (
