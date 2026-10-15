@@ -14,7 +14,7 @@ export function WorkspaceLayout({ children }: { children: ReactNode }) {
       {/* Основная рабочая зона */}
       <Group orientation="horizontal" className="flex-1">
         {/* Левая панель: История / Файлы */}
-        <Panel defaultSize={20} minSize={15} className="bg-zinc-900/30 p-4">
+        <Panel defaultSize="20%" minSize="15%" className="bg-zinc-900/30 p-4">
           <div className="text-xs font-medium uppercase tracking-wider text-zinc-500">
             Project Tree
           </div>
@@ -24,14 +24,14 @@ export function WorkspaceLayout({ children }: { children: ReactNode }) {
         <Separator className="w-[1px] bg-white/10 transition-all hover:w-1 hover:bg-sky-500/50 cursor-col-resize" />
 
         {/* Центральная панель: Чат (Контент страницы) */}
-        <Panel defaultSize={55} minSize={40} className="relative flex flex-col">
+        <Panel defaultSize="55%" minSize="40%" className="relative flex flex-col">
           {children}
         </Panel>
 
         <Separator className="w-[1px] bg-white/10 transition-all hover:w-1 hover:bg-sky-500/50 cursor-col-resize" />
 
         {/* Правая панель: Настройки */}
-        <Panel defaultSize={25} minSize={20} className="bg-zinc-900/30 p-4">
+        <Panel defaultSize="25%" minSize="20%" className="bg-zinc-900/30 p-4">
           <div className="text-xs font-medium uppercase tracking-wider text-zinc-500">
             Tools & Properties
           </div>
