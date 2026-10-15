@@ -31,7 +31,7 @@ export function PromptTextarea({
       maxRows={8}
       placeholder="Describe what to build or change..."
       aria-label="Prompt"
-      className="w-full resize-none bg-transparent px-3 py-2 text-sm leading-5 text-white placeholder:text-zinc-500 focus:outline-none disabled:opacity-50"
+      className="w-full resize-none bg-transparent px-3 py-2 text-sm leading-5 text-foreground placeholder:text-muted-foreground focus:outline-none disabled:opacity-50"
     />
   );
 }

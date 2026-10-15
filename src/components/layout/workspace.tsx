@@ -2,26 +2,28 @@
 
 import { ReactNode } from 'react';
 import { Panel, Group, Separator } from 'react-resizable-panels';
+import { ThemeToggle } from '@/components/layout/theme-toggle';
 
 export function WorkspaceLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex h-screen w-full flex-col overflow-hidden bg-zinc-950 font-sans text-zinc-50">
+    <div className="flex h-screen w-full flex-col overflow-hidden bg-background font-sans text-foreground">
       {/* Верхний Navbar */}
-      <header className="flex h-12 shrink-0 items-center border-b border-white/10 px-4">
-        <span className="font-semibold text-sky-400">Moqanni</span>
+      <header className="flex h-12 shrink-0 items-center justify-between border-b border-border px-4">
+        <span className="font-heading text-xl text-primary">Moqanni</span>
+        <ThemeToggle />
       </header>
 
       {/* Основная рабочая зона */}
       <Group orientation="horizontal" className="flex-1">
         {/* Левая панель: История / Файлы */}
-        <Panel defaultSize="20%" minSize="15%" className="bg-zinc-900/30 p-4">
-          <div className="text-xs font-medium tracking-wider text-zinc-500 uppercase">
+        <Panel defaultSize="20%" minSize="15%" className="bg-sidebar p-4">
+          <div className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
             Project Tree
           </div>
         </Panel>
 
         {/* Разделитель с ховером */}
-        <Separator className="w-[1px] cursor-col-resize bg-white/10 transition-all hover:w-1 hover:bg-sky-500/50" />
+        <Separator className="w-px cursor-col-resize bg-border transition-colors hover:bg-primary" />
 
         {/* Центральная панель: Чат (Контент страницы) */}
         <Panel
@@ -32,11 +34,11 @@ export function WorkspaceLayout({ children }: { children: ReactNode }) {
           {children}
         </Panel>
 
-        <Separator className="w-[1px] cursor-col-resize bg-white/10 transition-all hover:w-1 hover:bg-sky-500/50" />
+        <Separator className="w-px cursor-col-resize bg-border transition-colors hover:bg-primary" />
 
         {/* Правая панель: Настройки */}
-        <Panel defaultSize="25%" minSize="20%" className="bg-zinc-900/30 p-4">
-          <div className="text-xs font-medium tracking-wider text-zinc-500 uppercase">
+        <Panel defaultSize="25%" minSize="20%" className="bg-sidebar p-4">
+          <div className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
             Tools & Properties
           </div>
         </Panel>

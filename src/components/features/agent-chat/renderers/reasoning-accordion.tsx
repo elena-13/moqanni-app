@@ -32,16 +32,16 @@ export function ReasoningAccordion({
     <Collapsible
       open={open}
       onOpenChange={setOpen}
-      className="rounded-md border border-white/5 bg-zinc-950/40"
+      className="rounded-md border border-border bg-background/40"
     >
-      <CollapsibleTrigger className="group flex w-full items-center gap-1.5 px-3 py-2 text-xs text-zinc-500 transition-colors hover:text-zinc-300">
+      <CollapsibleTrigger className="group flex w-full items-center gap-1.5 px-3 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground">
         <ChevronRight className="size-3 transition-transform group-data-panel-open:rotate-90" />
-        <span className={cn(isThinking && 'animate-pulse text-emerald-400/80')}>
+        <span className={cn(isThinking && 'animate-pulse text-primary/80')}>
           {isThinking ? `${agentName} is thinking...` : 'Reasoning'}
         </span>
       </CollapsibleTrigger>
       <CollapsibleContent className="h-(--collapsible-panel-height) overflow-hidden transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0">
-        <div className="px-3 pb-3 text-xs leading-relaxed whitespace-pre-wrap text-zinc-500">
+        <div className="px-3 pb-3 text-xs leading-relaxed whitespace-pre-wrap text-muted-foreground">
           {thought}
         </div>
       </CollapsibleContent>

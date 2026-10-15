@@ -23,7 +23,7 @@ export function ChatInputAction({
         onClick={onStop}
         className={cn(
           baseClassName,
-          'bg-zinc-800 text-red-400 hover:bg-zinc-700',
+          'bg-secondary text-destructive hover:bg-muted',
         )}
       >
         <StopCircle className="h-4 w-4" /> Stop
@@ -37,7 +37,7 @@ export function ChatInputAction({
       disabled={!canSubmit}
       className={cn(
         baseClassName,
-        'bg-emerald-600 text-white hover:bg-emerald-500 disabled:opacity-50 disabled:hover:bg-emerald-600',
+        'bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:hover:bg-primary',
       )}
     >
       <Send className="h-4 w-4" /> Build

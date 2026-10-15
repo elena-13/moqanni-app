@@ -1,0 +1,9 @@
+:root {
+  --font-body:
+    var(--font-inter-tight), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* next/font's Times fallback would catch Cyrillic first, so Cormorant is listed by name right after Instrument Serif */
+  --font-display:
+    'Instrument Serif', 'Cormorant Garamond', var(--font-instrument-serif),
+    ui-serif, Georgia, serif;
+  --font-code: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}

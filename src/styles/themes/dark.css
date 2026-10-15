@@ -1,0 +1,39 @@
+.dark {
+  color-scheme: dark;
+
+  --background: var(--ash-800);
+  --foreground: var(--ash-50);
+  --card: var(--ash-800);
+  --card-foreground: var(--ash-50);
+  --popover: var(--ash-800);
+  --popover-foreground: var(--ash-50);
+  --primary: var(--water-400);
+  --primary-foreground: var(--ash-900);
+  --secondary: var(--ash-700);
+  --secondary-foreground: var(--ash-50);
+  --muted: var(--ash-700);
+  --muted-foreground: var(--ash-300);
+  --accent: var(--ash-700);
+  --accent-foreground: var(--ash-50);
+  --destructive: var(--coral-400);
+  --success: var(--kelp-400);
+  --warning: var(--sand-400);
+  --border: var(--ash-600);
+  --input: var(--ash-600);
+  --ring: var(--water-500);
+
+  --chart-1: var(--water-200);
+  --chart-2: var(--water-400);
+  --chart-3: var(--water-600);
+  --chart-4: var(--kelp-400);
+  --chart-5: var(--sand-400);
+
+  --sidebar: var(--ash-800);
+  --sidebar-foreground: var(--ash-50);
+  --sidebar-primary: var(--water-400);
+  --sidebar-primary-foreground: var(--ash-900);
+  --sidebar-accent: var(--ash-700);
+  --sidebar-accent-foreground: var(--ash-50);
+  --sidebar-border: var(--ash-600);
+  --sidebar-ring: var(--water-500);
+}

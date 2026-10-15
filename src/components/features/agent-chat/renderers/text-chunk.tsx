@@ -16,21 +16,21 @@ export function TextChunk({ block }: { block: AgentBlock }) {
   const isThinking = isRunning && thought !== null && !hasFinalAnswer;
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-white/5 bg-zinc-900/50 p-4">
-      <div className="flex items-center gap-2 text-xs font-medium text-zinc-400">
-        <span className="text-emerald-400">{agentName}</span>
-        <span className="text-zinc-600">•</span>
+    <div className="flex flex-col gap-3 rounded-lg border border-border bg-card/60 p-4">
+      <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+        <span className="text-primary">{agentName}</span>
+        <span className="text-muted-foreground/50">•</span>
         <span>{block.task}</span>
 
         <div className="ml-auto">
           {isRunning && (
-            <Loader2 className="h-3 w-3 animate-spin text-emerald-500" />
+            <Loader2 className="h-3 w-3 animate-spin text-primary" />
           )}
           {block.status === 'completed' && (
-            <CheckCircle2 className="h-3 w-3 text-emerald-500/50" />
+            <CheckCircle2 className="h-3 w-3 text-success" />
           )}
           {block.status === 'error' && (
-            <AlertCircle className="h-3 w-3 text-red-500" />
+            <AlertCircle className="h-3 w-3 text-destructive" />
           )}
         </div>
       </div>
@@ -46,11 +46,11 @@ export function TextChunk({ block }: { block: AgentBlock }) {
       {answer && <AgentAnswer text={answer} />}
 
       {isRunning && !isThinking && (
-        <span className="inline-block h-3 w-2 animate-pulse bg-emerald-500/80" />
+        <span className="inline-block h-3 w-2 animate-pulse bg-primary/80" />
       )}
 
       {block.error && (
-        <div className="mt-2 text-xs text-red-400">{block.error}</div>
+        <div className="mt-2 text-xs text-destructive">{block.error}</div>
       )}
     </div>
   );

@@ -25,7 +25,7 @@ export function BlockFactory({ blockId }: { blockId: string }) {
       return <ImageWidget block={block} />;
     default:
       return (
-        <div className="text-red-500">Unknown block type: {block.type}</div>
+        <div className="text-destructive">Unknown block type: {block.type}</div>
       );
   }
 }

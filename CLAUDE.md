@@ -12,7 +12,7 @@ Follow all rules below strictly.
 
 - Framework: Next.js 16 (App Router, Turbopack), React 19 with the React Compiler enabled
 - Language: TypeScript (Strict Mode)
-- Styling: Tailwind CSS v4, `tw-animate-css`; class merging via `cn()` from the `cn` package (re-exported by `@/lib/utils`)
+- Styling: Tailwind CSS v4, `tw-animate-css`; colors come only from semantic tokens (`bg-primary`, `text-muted-foreground`, …) defined in `src/styles/` — never raw palette classes like `bg-zinc-900`; class merging via `cn()` from the `cn` package (re-exported by `@/lib/utils`)
 - UI Components: shadcn/ui (`base-nova` style) on Base UI (`@base-ui/react`), variants with `class-variance-authority`
 - Icons: `lucide-react`
 - Layout: `react-resizable-panels` (v4 — numeric sizes are pixels; use `"55%"` strings for percentages)
@@ -160,6 +160,7 @@ src/
   hooks/                # hooks reused across features
   lib/                  # utilities and mock data
   services/             # API client and stream parsing
+  styles/               # theme CSS imported by app/globals.css (tokens/, themes/)
   store/                # Zustand stores
   types/                # shared domain types (e.g. crew-ai.ts)
 public/

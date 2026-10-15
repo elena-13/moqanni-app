@@ -18,7 +18,7 @@ export function ChatFeed() {
 
   if (blockIds.length === 0) {
     return (
-      <div className="flex h-full items-center justify-center text-sm text-zinc-500">
+      <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
         Describe what to build or change...
       </div>
     );
