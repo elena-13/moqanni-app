@@ -1,20 +1,17 @@
 import { create } from 'zustand';
 
-// 1. Дискриминатор для нашей Фабрики Компонентов
 export type BlockType = 'text' | 'image_widget' | 'code_preview' | 'tool_log';
 
 export interface AgentBlock {
   id: string;
-  role: 'user' | 'assistant'; // Отделяем промпты человека от ответов ИИ
+  role: 'user' | 'assistant';
   type: BlockType;
 
-  // Метаданные агента (опционально, так как у пользователя их нет)
   agentName?: string;
   task?: string;
 
-  // Поля данных (гибкие под разные нейронки)
-  text: string; // Текст заполняется через flushTextDelta
-  data?: unknown; // Сюда можно положить { urls: [...] } от DALL-E или логи тулов
+  text: string;
+  data?: unknown; // e.g. { urls: [...] } from an image model, or tool logs
 
   status: 'running' | 'completed' | 'error' | 'aborted';
   error?: string;
@@ -24,8 +21,7 @@ interface ChatState {
   blocks: Record<string, AgentBlock>;
   blockIds: string[];
 
-  // Экшены
-  addUserMessage: (id: string, text: string) => void; // НОВЫЙ: для инпута пользователя
+  addUserMessage: (id: string, text: string) => void;
   startAgent: (
     id: string,
     agentName: string,
@@ -33,7 +29,7 @@ interface ChatState {
     type?: BlockType,
   ) => void;
   flushTextDelta: (id: string, accumulatedText: string) => void;
-  setBlockData: (id: string, data: unknown) => void; // НОВЫЙ: для картинок и виджетов
+  setBlockData: (id: string, data: unknown) => void;
   completeAgent: (id: string) => void;
   failAgent: (id: string, error: string) => void;
   clearStore: () => void;
@@ -43,7 +39,6 @@ export const useChatStore = create<ChatState>((set) => ({
   blocks: {},
   blockIds: [],
 
-  // Добавление промпта от человека мгновенно
   addUserMessage: (id, text) =>
     set((state) => {
       if (state.blocks[id]) return state;
@@ -56,7 +51,6 @@ export const useChatStore = create<ChatState>((set) => ({
       };
     }),
 
-  // Добавлен type, чтобы понимать, картинку мы ждем или текст
   startAgent: (id, agentName, task, type = 'text') =>
     set((state) => {
       if (state.blocks[id]) return state;
@@ -90,7 +84,6 @@ export const useChatStore = create<ChatState>((set) => ({
       };
     }),
 
-  // Экшен для сохранения виджетов/картинок от не-текстовых нейронок
   setBlockData: (id, data) =>
     set((state) => {
       const block = state.blocks[id];

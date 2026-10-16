@@ -4,16 +4,14 @@ import { AgentBlock } from '@/store/chat-store';
 import { ImageIcon, CheckCircle2 } from 'lucide-react';
 import { useState } from 'react';
 
-// 1. Описываем интерфейс того, что мы ожидаем внутри block.data
 interface ImageWidgetData {
   urls?: string[];
 }
 
 export function ImageWidget({ block }: { block: AgentBlock }) {
-  // 2. Безопасно приводим block.data к нашему интерфейсу
   const data = block.data as ImageWidgetData | undefined;
 
-  // Если ссылок нет, используем массив чисел для заглушек
+  // Without URLs, numbers render as placeholder tiles.
   const images = data?.urls || [1, 2, 3, 4];
 
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -30,7 +28,6 @@ export function ImageWidget({ block }: { block: AgentBlock }) {
       </div>
 
       <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        {/* 3. Меняем тип img с any на string | number (ссылка или заглушка) */}
         {images.map((img: string | number, index: number) => {
           const isSelected = selectedIndex === index;
 

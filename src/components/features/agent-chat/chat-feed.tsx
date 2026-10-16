@@ -1,4 +1,3 @@
-// Лента сообщений
 'use client';
 
 import { useEffect, useRef } from 'react';
@@ -6,12 +5,10 @@ import { useChatStore } from '@/store/chat-store';
 import { BlockFactory } from './renderers/block-factory';
 
 export function ChatFeed() {
-  // Подписываемся ТОЛЬКО на массив ID.
-  // Изменение текста внутри блоков не вызовет перерендер этого списка!
+  // Subscribing to ids only, so streaming text inside a block doesn't re-render the list.
   const blockIds = useChatStore((s) => s.blockIds);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  // Автоскролл вниз при появлении новых блоков
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [blockIds.length]);

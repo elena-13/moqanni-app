@@ -1,1 +1,1 @@
-// # Типы: AgentRole, StreamEvent, ToolExecutionResult
+// Types: AgentRole, StreamEvent, ToolExecutionResult

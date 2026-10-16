@@ -1,1 +1,1 @@
-// (с 'use client'), который собирает в себя все контексты интерфейса. В layout.tsx импортируется только он.
+// Client component that combines all UI contexts; layout.tsx imports only this.

@@ -1,10 +1,10 @@
 import { useRef, useEffect, useCallback } from 'react';
 import { useChatStore } from '@/store/chat-store';
+import { buildHistoryWindow } from '@/services/context-window';
 import { consumeSSEStream } from '@/services/stream-parser';
 
 export function useChatStream() {
-  // Достаем экшены через getState().
-  // Это гарантирует 0% лишних ререндеров компонента, который вызовет этот хук.
+  // Actions come from getState() so this hook never subscribes and never re-renders its caller.
   const {
     addUserMessage,
     startAgent,
@@ -39,30 +39,18 @@ export function useChatStream() {
     };
   }, [flushBuffer]);
 
-  // Принимаем промпт от компонента ввода (Input)
   const startStream = async (prompt: string) => {
     if (abortController.current) {
       abortController.current.abort();
     }
     abortController.current = new AbortController();
 
-    // 1. Собираем историю предыдущих сообщений из стора
     const state = useChatStore.getState();
-    const history = state.blockIds
-      .map((id) => state.blocks[id])
-      .filter(
-        (b) =>
-          b &&
-          b.type === 'text' &&
-          b.status === 'completed' &&
-          b.text.trim() !== '',
-      )
-      .map((b) => ({
-        role: b.role,
-        content: b.text,
-      }));
+    const history = buildHistoryWindow(
+      state.blockIds.map((id) => state.blocks[id]),
+      prompt,
+    );
 
-    // 1. Мгновенно рендерим сообщение пользователя в ленте
     const userMsgId = crypto.randomUUID();
     addUserMessage(userMsgId, prompt);
 
@@ -71,9 +59,8 @@ export function useChatStream() {
         // "/api/mock-crew"
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // <-- Критически важно для FastAPI
+          'Content-Type': 'application/json', // FastAPI only parses the JSON body with this header
         },
-        // 3. Отправляем И текущий промпт, И историю диалога
         body: JSON.stringify({
           prompt,
           history,
@@ -84,7 +71,6 @@ export function useChatStream() {
       if (!res.ok) throw new Error('Network response was not ok');
 
       await consumeSSEStream(res, (payload) => {
-        // Старт текстового агента
         if (payload.event.endsWith('.started')) {
           if ('agent' in payload.data && 'task' in payload.data) {
             flushBuffer();
@@ -95,7 +81,6 @@ export function useChatStream() {
           }
         }
 
-        // Поток текста
         if (payload.event.endsWith('.delta') && 'text' in payload.data) {
           textBuffer.current += payload.data.text;
 
@@ -106,7 +91,6 @@ export function useChatStream() {
           }
         }
 
-        // НОВОЕ: Обработка моментального виджета (например, картинок)
         if (payload.event.endsWith('.widget')) {
           if (
             'type' in payload.data &&
@@ -116,7 +100,6 @@ export function useChatStream() {
           ) {
             flushBuffer();
             const id = crypto.randomUUID();
-            // payload.data.type может быть 'image_widget'
             startAgent(
               id,
               payload.data.agent,
@@ -128,7 +111,6 @@ export function useChatStream() {
           }
         }
 
-        // Завершение агента
         if (
           payload.event.endsWith('.completed') &&
           !payload.event.startsWith('run')
@@ -151,7 +133,7 @@ export function useChatStream() {
           }
         }
       } else {
-        // Редкий случай, если кто-то сделал throw "String" или throw { custom: 1 }
+        // Covers non-Error throws such as `throw 'string'` or `throw { custom: 1 }`.
         console.error('Stream failed with non-Error throw:', error);
         if (activeAgentId.current) {
           failAgent(activeAgentId.current, 'Unknown stream error');
