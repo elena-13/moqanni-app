@@ -4,7 +4,12 @@ import { ReactNode } from 'react';
 import { Panel, Group, Separator } from 'react-resizable-panels';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 
-export function WorkspaceLayout({ children }: { children: ReactNode }) {
+interface WorkspaceLayoutProps {
+  sidebar: ReactNode;
+  children: ReactNode;
+}
+
+export function WorkspaceLayout({ sidebar, children }: WorkspaceLayoutProps) {
   return (
     <div className="flex h-screen w-full flex-col overflow-hidden bg-background font-sans text-foreground">
       <header className="flex h-12 shrink-0 items-center justify-between border-b border-border px-4">
@@ -14,9 +19,7 @@ export function WorkspaceLayout({ children }: { children: ReactNode }) {
 
       <Group orientation="horizontal" className="flex-1">
         <Panel defaultSize="20%" minSize="15%" className="bg-sidebar p-4">
-          <div className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
-            Project Tree
-          </div>
+          {sidebar}
         </Panel>
 
         <Separator className="w-px cursor-col-resize bg-border transition-colors hover:bg-primary" />

@@ -37,7 +37,7 @@ export function ChatInputAction({
       disabled={!canSubmit}
       className={cn(
         baseClassName,
-        'bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:hover:bg-primary',
+        'rounded-full bg-primary-fill text-primary-foreground hover:bg-primary-fill/90 disabled:opacity-50 disabled:hover:bg-primary-fill',
       )}
     >
       <Send className="h-4 w-4" /> Build

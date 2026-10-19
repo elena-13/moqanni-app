@@ -7,8 +7,9 @@
   --card-foreground: var(--ash-800);
   --popover: var(--ash-100);
   --popover-foreground: var(--ash-800);
-  --primary: var(--water-600);
-  --primary-foreground: var(--ash-50);
+  --primary: var(--iris-700);
+  --primary-foreground: var(--ash-950);
+  --primary-fill: var(--iris-400);
   --secondary: var(--ash-200);
   --secondary-foreground: var(--ash-800);
   --muted: var(--ash-200);
@@ -20,7 +21,7 @@
   --warning: var(--sand-600);
   --border: var(--ash-300);
   --input: var(--ash-300);
-  --ring: var(--water-500);
+  --ring: var(--iris-500);
 
   --chart-1: var(--water-300);
   --chart-2: var(--water-500);
@@ -30,10 +31,10 @@
 
   --sidebar: var(--ash-100);
   --sidebar-foreground: var(--ash-800);
-  --sidebar-primary: var(--water-600);
+  --sidebar-primary: var(--iris-700);
   --sidebar-primary-foreground: var(--ash-50);
   --sidebar-accent: var(--ash-200);
   --sidebar-accent-foreground: var(--ash-800);
   --sidebar-border: var(--ash-300);
-  --sidebar-ring: var(--water-500);
+  --sidebar-ring: var(--iris-500);
 }

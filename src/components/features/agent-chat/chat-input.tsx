@@ -29,7 +29,7 @@ export function ChatInput() {
       onSubmit={handleSubmit}
       className="absolute bottom-6 left-1/2 w-full max-w-3xl -translate-x-1/2 px-4"
     >
-      <div className="relative flex items-end rounded-xl border border-border bg-card/80 p-2 backdrop-blur-md transition-all focus-within:border-ring/50 focus-within:ring-1 focus-within:ring-ring/50">
+      <div className="relative flex items-end rounded-prompt border border-border bg-card/80 p-2 backdrop-blur-md transition-all focus-within:border-ring/50 focus-within:ring-1 focus-within:ring-ring/50">
         <PromptTextarea
           value={prompt}
           disabled={isGenerating}

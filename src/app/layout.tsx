@@ -1,16 +1,13 @@
 import type { Metadata } from 'next';
-import {
-  Cormorant_Garamond,
-  Instrument_Serif,
-  Inter_Tight,
-} from 'next/font/google';
+import { Cormorant_Garamond, Instrument_Serif, Inter } from 'next/font/google';
 import Script from 'next/script';
+import { AppProvider } from '@/components/providers/app-provider';
 import { THEME_INIT_SCRIPT } from '@/data/config/theme';
 import './globals.css';
 
-const interTight = Inter_Tight({
+const inter = Inter({
   subsets: ['latin', 'cyrillic'],
-  variable: '--font-inter-tight',
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -39,14 +36,14 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${interTight.variable} ${instrumentSerif.variable} ${cormorantGaramond.variable} dark h-full antialiased`}
+      className={`${inter.variable} ${instrumentSerif.variable} ${cormorantGaramond.variable} dark h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
         <Script id="theme-init" strategy="beforeInteractive">
           {THEME_INIT_SCRIPT}
         </Script>
-        {children}
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );
